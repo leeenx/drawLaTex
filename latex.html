@@ -14,25 +14,12 @@
 </style>
 </head>
 <body>
+<textarea style="width: 500px; height: 300px; border: 0 none;" id="latex"></textarea>
 <div id="buffer">
-$$  x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
-<br /><br />
- $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$
-<br /><br />
- \[ - \frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\Psi(x,\,t)+V(x)\Psi(x,\,t) \]
-<br /><br />
-$
-\sqrt{a^2+b^2}x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}
-$ 
-<br /><br />
-$$\sum_{i=1}^n a_i=0$$
-<br /><br />
-$$f(x)=x^{x^x}$$
-<br /><br />
-$$ \begin{array}{c|lcr} n & \text{Left} & \text{Center} & \text{Right} \\ \hline 1 & 0.24 & 1 & 125 \\ 2 & -1 & 189 & -8 \\ 3 & -20 & 2000 & 1+10i \\ \end{array} $$
+
 </div>
-<input type="button" value="生成LaTex公式" onclick="drawLaTex()" />
-<canvas id="canvas" width="1000px" height="600px"></canvas>
+<input type="button" value="生成LaTex公式" onclick="drawLaTex()" /><br />
+<canvas id="canvas"></canvas>
 </body>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -52,8 +39,12 @@ MathJax.Hub.Config({
   });
 </script>
 <script type="text/javascript" src="MathJax.js?config=TeX-AMS-MML_SVG"></script>
+<script type="text/javascript" src="canvg/rgbcolor.js"></script> 
+<script type="text/javascript" src="canvg/StackBlur.js"></script>
+<script type="text/javascript" src="canvg/canvg.js"></script> 
 <script type="text/javascript">
 var drawLaTex=function(){
+    buffer.innerHTML=latex.value;
     MathJax.Hub.Queue(
         [
             "Typeset",
@@ -70,8 +61,5 @@ var drawLaTex=function(){
         ]
     );
 };
-// var startup=MathJax.Hub.Startup;
-//MathJax.Hub.Startup.onload=MathJax.Hub.Startup.onLoad=function(){console.log(3333)};//不自动渲染tex
-//MathJax.Hub.Configured()
 </script>
 </html>
