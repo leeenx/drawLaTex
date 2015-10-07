@@ -1,8 +1,13 @@
 ~function(){
-    var canvas=document.createElement("canvas"),buffer=document.createElement("div");
+    var canvas=document.createElement("canvas"),buffer=document.createElement("div"),drawing=0,drawQueue=[];
     buffer.style.display="none";
     document.body.appendChild(buffer);
     window.drawLaTex=function(val,container){
+        if(drawing){
+            drawQueue.push([val,container]);
+            return ;//正在渲染中
+        }
+        drawing=1;
         typeof(container)=="string"&&(container=document.getElementById(container));
         buffer.innerHTML=val;
         MathJax.Hub.Queue(
@@ -31,6 +36,14 @@
                                 console.log(base64Imgs);
                             }
                         });
+                        //按队列输出
+                        if(drawQueue.length){
+                            //继续渲染
+                            var arg=drawQueue.shift();
+                            drawLaTex(arg[0],arg[1]);
+                        }else{
+                            drawing=0;//结束渲染
+                        }
                     }
                 }
             ]
