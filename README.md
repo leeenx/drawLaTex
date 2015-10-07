@@ -30,9 +30,53 @@ git拿下来的MathJax足足有152M。
 
 本项目是在chrome下开发的，其它浏览器没有测试过。估计firefox和ie9以上都是可以运行的
 
+## How to use
+
+在需要调用的页面的底部加入以下代码
+
+```html
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config(
+{
+	skipStartupTypeset:true,
+	showProcessingMessages: false,
+	messageStyle: "none",
+	tex2jax: {
+	  inlineMath: [["$", "$"], ["\\(", "\\)"]],
+	  displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+	},
+	SVG: {
+	  linebreaks: {
+	    automatic: true,
+	    width: "container"
+	  }
+	}
+});
+</script>
+<script type="text/javascript" src="MathJax.js?config=TeX-AMS-MML_SVG"></script>
+<script type="text/javascript" src="canvg/rgbcolor.js"></script> 
+<script type="text/javascript" src="canvg/StackBlur.js"></script>
+<script type="text/javascript" src="canvg/canvg.js"></script> 
+<script type="text/javascript" src="drawLaTex/drawLaTex.js"></script>
+```
+
+有两种形式的调用:
+
+```javascript
+drawLaTex('$$LaTex$$','container');//container为显示LaTex公式的容器的id号
+drawLaTex('$$LaTex$$',document.getElementById('container'));//要上面一样，只是直接用dom对象
+drawLaTex('$$LaTex$$',function(base64Imgs){
+	//不直接显示时，可以拿回调的base64数组
+	for(var i=0,len=base64Imgs.length;i<len;++i){
+		console.log(base64Imgs[i][0],base64Imgs[i][1]);//第一个是base64,第二个是显示方式
+	}
+});
+```
+
+
 ## 感谢
 
-感谢 `MathJax` 和 `canvg` 提供的代码。
+感谢 `MathJax` 和 `canvg`。
 
 MathJax 的GigHub地址： [https://github.com/mathjax/MathJax](https://github.com/mathjax/MathJax)
 

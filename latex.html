@@ -7,19 +7,17 @@
 <meta content="black" name="apple-mobile-web-app-status-bar-style">
 <meta content="telephone=no" name="format-detection">
 <meta content="email=no" name="format-detection">
-<title>mathJax</title>
+<title>drawLaTex</title>
 <!-- <link href="css/index.css" type="text/css" rel="stylesheet" /> -->
-<style>
-#diagram{position: relative; width: 500px; height: auto; margin: 0 auto;}
-</style>
 </head>
 <body>
-<textarea style="width: 500px; height: 300px; border: 0 none;" id="latex"></textarea>
-<div id="buffer">
-
-</div>
-<input type="button" value="生成LaTex公式" onclick="drawLaTex()" /><br />
-<canvas id="canvas"></canvas>
+<textarea style="width: 500px; height: 300px; border: 0 none; border: 1px solid #efefef; resize: none; outline: 0 none;" id="latex">
+$$\sum_{i=1}^n a_i=0$$
+</textarea>
+<input type="button" value="生成LaTex公式" onclick="drawLaTex(latex.value,'show')" style="display:block; margin: 10px 0;" />
+<input type="button" value="查看base64文件" onclick="drawLaTex(latex.value,function(base64Imgs){base64.innerHTML='';for(var i in base64Imgs){base64.innerHTML+=base64Imgs[i][0]+'<br />'}})" style="display:block; margin: 10px 0;" />
+<div id="show"></div>
+<div id="base64"></div>
 </body>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -42,24 +40,5 @@ MathJax.Hub.Config({
 <script type="text/javascript" src="canvg/rgbcolor.js"></script> 
 <script type="text/javascript" src="canvg/StackBlur.js"></script>
 <script type="text/javascript" src="canvg/canvg.js"></script> 
-<script type="text/javascript">
-var drawLaTex=function(){
-    buffer.innerHTML=latex.value;
-    MathJax.Hub.Queue(
-        [
-            "Typeset",
-            MathJax.Hub,
-            document.getElementById("buffer")],//需要渲染LaTex的容器
-            [
-                "PreviewDone",//渲染成功回调函数
-                {//回调函数的父对象
-                    PreviewDone:function()
-                    {//渲染成功
-                        console.log("渲染成功");
-                    }
-                }
-        ]
-    );
-};
-</script>
+<script type="text/javascript" src="drawLaTex/drawLaTex.js"></script>
 </html>
