@@ -43,13 +43,12 @@
                                 console.log(base64Imgs);
                             }
                         });
+                        drawing=0;//结束渲染
                         //按队列输出
                         if(drawQueue.length){
                             //继续渲染
                             var arg=drawQueue.shift();
                             drawLaTex(arg[0],arg[1]);
-                        }else{
-                            drawing=0;//结束渲染
                         }
                     }
                 }
