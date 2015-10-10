@@ -26,6 +26,7 @@ git拿下来的MathJax足足有152M。
 这也是为什么我只保留MathJax的SVG的原因了
 
 
+
 ## 适用浏览器
 
 本项目是在chrome下开发的，其它浏览器没有测试过。估计firefox和ie9以上都是可以运行的
@@ -72,7 +73,9 @@ drawLaTex('$$LaTex$$',function(base64Imgs){
 	}
 });
 ```
+## DEMO
 
+[http://leeenx.github.io/drawLaTex/latex.html](http://leeenx.github.io/drawLaTex/latex.html)
 
 ## 感谢
 
