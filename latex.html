@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<meta content="email=no" name="format-detection">
+<title>drawLaTex</title>
+<style>
+html,body{font-size: 16px;}
+</style>
+</head>
+<body>
+<textarea style="width: 500px; height: 300px; border: 0 none; border: 1px solid #efefef; resize: none; outline: 0 none;" id="latex">
+$$\sum_{i=1}^n a_i=0$$
+</textarea>
+<input type="button" value="生成LaTex公式" onclick="drawLaTex(latex.value,'show')" style="display:block; margin: 10px 0;" />
+<input type="button" value="查看base64文件" onclick="drawLaTex(latex.value,function(base64Imgs){base64.innerHTML='';for(var i in base64Imgs){base64.innerHTML+=base64Imgs[i][0]+'<br />'}})" style="display:block; margin: 10px 0;" />
+<div id="show"></div>
+<div id="base64"></div>
+</body>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    skipStartupTypeset:true,
+    showProcessingMessages: false,
+    messageStyle: "none",
+    tex2jax: {
+      inlineMath: [["$", "$"], ["\\(", "\\)"]],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    SVG: {
+      linebreaks: {
+        automatic: true,
+        width: "container"
+      }
+    }
+  });
+</script>
+<script type="text/javascript" src="MathJax.js?config=TeX-AMS-MML_SVG"></script>
+<script type="text/javascript" src="canvg/rgbcolor.js"></script> 
+<script type="text/javascript" src="canvg/StackBlur.js"></script>
+<script type="text/javascript" src="canvg/canvg.js"></script> 
+<script type="text/javascript" src="drawLaTex/drawLaTex.js"></script>
+</html>
